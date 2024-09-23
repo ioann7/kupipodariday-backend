@@ -77,7 +77,7 @@ export class OffersService {
   }
 
   async findOne(id: number): Promise<Offer> {
-    return await this.offersRepository.findOne({
+    return await this.offersRepository.findOneOrFail({
       where: { id },
       relations: ['user', 'item'],
     });

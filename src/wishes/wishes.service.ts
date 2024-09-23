@@ -44,7 +44,7 @@ export class WishesService {
   }
 
   async findOne(id: number): Promise<Wish> {
-    return await this.wishesRepository.findOne({
+    return await this.wishesRepository.findOneOrFail({
       where: { id },
       relations: ['owner', 'offers'],
     });

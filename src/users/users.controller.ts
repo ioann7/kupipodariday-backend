@@ -56,6 +56,7 @@ export class UsersController {
   }
 
   @Get(':username/wishes')
+  @UseFilters(EntityNotFoundFilter)
   async findUsernameWishes(@Param('username') username: string) {
     const user = await this.usersService.findByUsername(username);
     return await this.wishesService.findByUserId(user.id);

@@ -10,11 +10,13 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  UseFilters,
 } from '@nestjs/common';
 import { WishesService } from './wishes.service';
 import { CreateWishDto } from './dto/create-wish.dto';
 import { UpdateWishDto } from './dto/update-wish.dto';
 import { JWTGuard } from '../guards/jwt.guard';
+import { EntityNotFoundFilter } from '../core/filters/entity-not-found-exception.filter';
 
 @Controller('wishes')
 export class WishesController {
@@ -39,6 +41,7 @@ export class WishesController {
 
   @UseGuards(JWTGuard)
   @Get(':id')
+  @UseFilters(EntityNotFoundFilter)
   async findOne(@Param('id') id: string) {
     return await this.wishesService.findOne(+id);
   }
@@ -55,6 +58,7 @@ export class WishesController {
 
   @UseGuards(JWTGuard)
   @Delete(':id')
+  @UseFilters(EntityNotFoundFilter)
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string, @Req() req) {
     return await this.wishesService.remove(+id, req.user);
@@ -62,6 +66,7 @@ export class WishesController {
 
   @UseGuards(JWTGuard)
   @Post(':id/copy')
+  @UseFilters(EntityNotFoundFilter)
   async copyWish(@Param('id') id: string, @Req() req) {
     return await this.wishesService.copyWish(+id, req.user);
   }
