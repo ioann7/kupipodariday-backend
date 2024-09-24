@@ -38,7 +38,7 @@ export class OffersService {
       throw new ForbiddenException('You can create offer only for your wish.');
     }
 
-    if (wish.price < amount.add(wish.raised)) {
+    if (wish.price.lessThan(amount.add(wish.raised))) {
       throw new ForbiddenException(
         'Your donation surpasses the price of the wish.',
       );

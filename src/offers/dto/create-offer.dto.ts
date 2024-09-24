@@ -1,9 +1,8 @@
-import { IsDecimal, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateOfferDto {
   @IsNotEmpty()
-  @IsDecimal()
-  amount: string;
+  amount: number;
 
   @IsOptional()
   hidden: boolean;

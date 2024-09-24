@@ -1,6 +1,5 @@
 import { PartialType } from '@nestjs/swagger';
 import {
-  IsDecimal,
   IsOptional,
   IsString,
   IsUrl,
@@ -21,9 +20,8 @@ export class UpdateWishDto extends PartialType(CreateWishDto) {
   @IsOptional()
   image: string;
 
-  @IsDecimal()
   @IsOptional()
-  price: string;
+  price: number;
 
   @IsString()
   @IsOptional()
